@@ -1,0 +1,6998 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CRM API",
+    "description": "A comprehensive REST API for managing customer relationships, including companies, contacts, deals, sales representatives, and related data.",
+    "version": "14.4"
+  },
+  "externalDocs": {
+    "description": "PostgREST Documentation",
+    "url": "https://postgrest.org/en/v14/references/api.html"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:54321/rest/v1"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Introspection"
+        ],
+        "summary": "OpenAPI description (this document)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/contact_notes": {
+      "get": {
+        "tags": [
+          "contact_notes"
+        ],
+        "summary": "Retrieve contact notes",
+        "description": "Fetch notes and comments associated with specific contacts. Includes timestamps, sales representative information, and attachment data.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contact_notes"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contact_notes"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contact_notes"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contact_notes"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "contact_notes"
+        ],
+        "summary": "Create a new contact note",
+        "description": "Add a new note or comment to a contact record for tracking interactions and follow-ups.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "contact_notes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "contact_notes"
+      },
+      "delete": {
+        "tags": [
+          "contact_notes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "contact_notes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "contact_notes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/contact_notes"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "contact_notes"
+      }
+    },
+    "/contacts": {
+      "get": {
+        "tags": [
+          "contacts"
+        ],
+        "summary": "Retrieve contacts",
+        "description": "Fetch a list of all contacts in your CRM. Filter by company, sales representative, status, and other criteria. Includes contact information, communication preferences, and related company data.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "background",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_newsletter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "contacts"
+        ],
+        "summary": "Create a new contact",
+        "description": "Add a new contact to the CRM with email, phone, company association, and other relevant details.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "contacts",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "contacts"
+      },
+      "delete": {
+        "tags": [
+          "contacts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "background",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_newsletter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "contacts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "background",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_newsletter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "contacts",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/contacts"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "contacts"
+      }
+    },
+    "/companies_summary": {
+      "get": {
+        "tags": [
+          "companies_summary"
+        ],
+        "summary": "Retrieve companies summary",
+        "description": "Fetch a summary view of all companies with key metrics, deal counts, and recent activity.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sector",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state_abbr",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "context_links",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revenue",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tax_identifier",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nb_deals",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nb_contacts",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies_summary"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies_summary"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies_summary"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies_summary"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/favicons_excluded_domains": {
+      "get": {
+        "tags": [
+          "favicons_excluded_domains"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/favicons_excluded_domains"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/favicons_excluded_domains"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/favicons_excluded_domains"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/favicons_excluded_domains"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "favicons_excluded_domains"
+        ],
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "favicons_excluded_domains",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "favicons_excluded_domains"
+      },
+      "delete": {
+        "tags": [
+          "favicons_excluded_domains"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "favicons_excluded_domains"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "favicons_excluded_domains",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/favicons_excluded_domains"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "favicons_excluded_domains"
+      }
+    },
+    "/init_state": {
+      "get": {
+        "tags": [
+          "init_state"
+        ],
+        "parameters": [
+          {
+            "name": "is_initialized",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/init_state"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/init_state"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/init_state"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/init_state"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/sales": {
+      "get": {
+        "tags": [
+          "sales"
+        ],
+        "summary": "Retrieve sales representatives",
+        "description": "Fetch a list of all sales team members. View their contact information, permissions, and associated deals and contacts.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "administrator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "disabled",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sales"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sales"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sales"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sales"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "sales"
+        ],
+        "summary": "Create a new sales representative",
+        "description": "Add a new member to the sales team with email and contact information.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "sales",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "sales"
+      },
+      "delete": {
+        "tags": [
+          "sales"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "administrator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "disabled",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "sales"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "administrator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "disabled",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "sales",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/sales"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "sales"
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Retrieve tasks",
+        "description": "Fetch tasks and action items assigned to contacts and deals. Filter by status, assignee, and priority.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "due_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "done_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tasks"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tasks"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tasks"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tasks"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Create a new task",
+        "description": "Create a new task or action item related to a contact or deal.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "tasks",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "tasks"
+      },
+      "delete": {
+        "tags": [
+          "tasks"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "due_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "done_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "tasks"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "due_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "done_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "tasks",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "tasks"
+      }
+    },
+    "/deal_notes": {
+      "get": {
+        "tags": [
+          "deal_notes"
+        ],
+        "summary": "Retrieve deal notes",
+        "description": "Fetch notes and attachments associated with specific deals. Track deal progress and decision points.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deal_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deal_notes"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deal_notes"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deal_notes"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deal_notes"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "deal_notes"
+        ],
+        "summary": "Create a new deal note",
+        "description": "Add a note or attachment to a deal to document progress and key discussions.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "deal_notes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "deal_notes"
+      },
+      "delete": {
+        "tags": [
+          "deal_notes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deal_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "deal_notes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deal_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attachments",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "deal_notes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/deal_notes"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "deal_notes"
+      }
+    },
+    "/deals": {
+      "get": {
+        "tags": [
+          "deals"
+        ],
+        "summary": "Retrieve deals",
+        "description": "Fetch all sales deals in the pipeline. Filter by stage, amount, company, and sales representative. Includes related contacts and expected closing dates.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stage",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "archived_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expected_closing_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deals"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deals"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deals"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/deals"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "deals"
+        ],
+        "summary": "Create a new deal",
+        "description": "Create a new sales deal with company, contacts, amount, stage, and expected closing date.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "deals",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "deals"
+      },
+      "delete": {
+        "tags": [
+          "deals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stage",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "archived_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expected_closing_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "deals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contact_ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stage",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "updated_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "archived_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expected_closing_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "deals",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/deals"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "deals"
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "Retrieve tags",
+        "description": "Fetch all tags used in the system for organizing contacts, deals, and companies.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tags"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tags"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tags"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tags"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "Create a new tag",
+        "description": "Create a new tag for organizing and categorizing contacts, deals, and companies.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "tags",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "tags"
+      },
+      "delete": {
+        "tags": [
+          "tags"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "tags"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "tags",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/tags"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "tags"
+      }
+    },
+    "/contacts_summary": {
+      "get": {
+        "tags": [
+          "contacts_summary"
+        ],
+        "summary": "Retrieve contacts summary",
+        "description": "Fetch a summary view of all contacts with key information, company affiliation, and associated deals.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_fts",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_jsonb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_fts",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "background",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "avatar",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "first_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last_seen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "has_newsletter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nb_tasks",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts_summary"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts_summary"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts_summary"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/contacts_summary"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/companies": {
+      "get": {
+        "tags": [
+          "companies"
+        ],
+        "summary": "Retrieve companies",
+        "description": "Fetch all companies in the CRM with details about their contacts, deals, and sales activities.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sector",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state_abbr",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "context_links",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revenue",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tax_identifier",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordering",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Range-Unit",
+            "in": "header",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string",
+              "default": "items"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limiting and Pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json;nulls=stripped": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies"
+                  }
+                }
+              },
+              "application/vnd.pgrst.object+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/companies"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "companies"
+        ],
+        "summary": "Create a new company",
+        "description": "Add a new company to the CRM with contact and business information.",
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Filtering Columns",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none",
+                "resolution=ignore-duplicates",
+                "resolution=merge-duplicates"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "companies",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "companies"
+      },
+      "delete": {
+        "tags": [
+          "companies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sector",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state_abbr",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "context_links",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revenue",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tax_identifier",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "companies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "created_at",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sector",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linkedin_url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "website",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipcode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state_abbr",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sales_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "context_links",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revenue",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tax_identifier",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "return=representation",
+                "return=minimal",
+                "return=none"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "companies",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "$ref": "#/components/schemas/companies"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "companies"
+      }
+    },
+    "/rpc/get_avatar_for_email": {
+      "post": {
+        "tags": [
+          "(rpc) get_avatar_for_email"
+        ],
+        "parameters": [
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "email"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "required": [
+                  "email"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "required": [
+                  "email"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "required": [
+                  "email"
+                ],
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "args"
+      }
+    },
+    "/rpc/get_domain_favicon": {
+      "post": {
+        "tags": [
+          "(rpc) get_domain_favicon"
+        ],
+        "parameters": [
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "domain_name"
+                ],
+                "type": "object",
+                "properties": {
+                  "domain_name": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "required": [
+                  "domain_name"
+                ],
+                "type": "object",
+                "properties": {
+                  "domain_name": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "required": [
+                  "domain_name"
+                ],
+                "type": "object",
+                "properties": {
+                  "domain_name": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "required": [
+                  "domain_name"
+                ],
+                "type": "object",
+                "properties": {
+                  "domain_name": {
+                    "type": "string",
+                    "format": "text"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "args"
+      }
+    },
+    "/rpc/merge_contacts": {
+      "post": {
+        "tags": [
+          "(rpc) merge_contacts"
+        ],
+        "parameters": [
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Preference",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "loser_id",
+                  "winner_id"
+                ],
+                "type": "object",
+                "properties": {
+                  "loser_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  },
+                  "winner_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json;nulls=stripped": {
+              "schema": {
+                "required": [
+                  "loser_id",
+                  "winner_id"
+                ],
+                "type": "object",
+                "properties": {
+                  "loser_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  },
+                  "winner_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  }
+                }
+              }
+            },
+            "application/vnd.pgrst.object+json": {
+              "schema": {
+                "required": [
+                  "loser_id",
+                  "winner_id"
+                ],
+                "type": "object",
+                "properties": {
+                  "loser_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  },
+                  "winner_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  }
+                }
+              }
+            },
+            "text/csv": {
+              "schema": {
+                "required": [
+                  "loser_id",
+                  "winner_id"
+                ],
+                "type": "object",
+                "properties": {
+                  "loser_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  },
+                  "winner_id": {
+                    "type": "integer",
+                    "format": "bigint"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "args"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "contact_notes": {
+        "required": [
+          "contact_id",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "contact_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `contacts.id`.<fk table='contacts' column='id'/>",
+            "format": "bigint"
+          },
+          "text": {
+            "type": "string",
+            "format": "text"
+          },
+          "date": {
+            "type": "string",
+            "format": "timestamp with time zone",
+            "default": "now()"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "status": {
+            "type": "string",
+            "format": "text"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "contacts": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "first_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "last_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "gender": {
+            "type": "string",
+            "format": "text"
+          },
+          "title": {
+            "type": "string",
+            "format": "text"
+          },
+          "background": {
+            "type": "string",
+            "format": "text"
+          },
+          "avatar": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "has_newsletter": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "format": "text"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `companies.id`.<fk table='companies' column='id'/>",
+            "format": "bigint"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "linkedin_url": {
+            "type": "string",
+            "format": "text"
+          },
+          "email_jsonb": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "phone_jsonb": {
+            "type": "object",
+            "format": "jsonb"
+          }
+        }
+      },
+      "companies_summary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "name": {
+            "type": "string",
+            "format": "text"
+          },
+          "sector": {
+            "type": "string",
+            "format": "text"
+          },
+          "size": {
+            "type": "integer",
+            "format": "smallint"
+          },
+          "linkedin_url": {
+            "type": "string",
+            "format": "text"
+          },
+          "website": {
+            "type": "string",
+            "format": "text"
+          },
+          "phone_number": {
+            "type": "string",
+            "format": "text"
+          },
+          "address": {
+            "type": "string",
+            "format": "text"
+          },
+          "zipcode": {
+            "type": "string",
+            "format": "text"
+          },
+          "city": {
+            "type": "string",
+            "format": "text"
+          },
+          "state_abbr": {
+            "type": "string",
+            "format": "text"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "context_links": {
+            "type": "object",
+            "format": "json"
+          },
+          "country": {
+            "type": "string",
+            "format": "text"
+          },
+          "description": {
+            "type": "string",
+            "format": "text"
+          },
+          "revenue": {
+            "type": "string",
+            "format": "text"
+          },
+          "tax_identifier": {
+            "type": "string",
+            "format": "text"
+          },
+          "logo": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "nb_deals": {
+            "type": "integer",
+            "format": "bigint"
+          },
+          "nb_contacts": {
+            "type": "integer",
+            "format": "bigint"
+          }
+        }
+      },
+      "favicons_excluded_domains": {
+        "required": [
+          "domain",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "domain": {
+            "type": "string",
+            "format": "text"
+          }
+        }
+      },
+      "init_state": {
+        "type": "object",
+        "properties": {
+          "is_initialized": {
+            "type": "integer",
+            "format": "bigint"
+          }
+        }
+      },
+      "sales": {
+        "required": [
+          "administrator",
+          "disabled",
+          "email",
+          "first_name",
+          "id",
+          "last_name",
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "first_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "last_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "email": {
+            "type": "string",
+            "format": "text"
+          },
+          "administrator": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "avatar": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "disabled": {
+            "type": "boolean",
+            "format": "boolean",
+            "default": false
+          }
+        }
+      },
+      "tasks": {
+        "required": [
+          "contact_id",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "contact_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `contacts.id`.<fk table='contacts' column='id'/>",
+            "format": "bigint"
+          },
+          "type": {
+            "type": "string",
+            "format": "text"
+          },
+          "text": {
+            "type": "string",
+            "format": "text"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "done_date": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "sales_id": {
+            "type": "integer",
+            "format": "bigint"
+          }
+        }
+      },
+      "deal_notes": {
+        "required": [
+          "deal_id",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "deal_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `deals.id`.<fk table='deals' column='id'/>",
+            "format": "bigint"
+          },
+          "type": {
+            "type": "string",
+            "format": "text"
+          },
+          "text": {
+            "type": "string",
+            "format": "text"
+          },
+          "date": {
+            "type": "string",
+            "format": "timestamp with time zone",
+            "default": "now()"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "deals": {
+        "required": [
+          "created_at",
+          "id",
+          "name",
+          "stage",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "name": {
+            "type": "string",
+            "format": "text"
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `companies.id`.<fk table='companies' column='id'/>",
+            "format": "bigint"
+          },
+          "contact_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "category": {
+            "type": "string",
+            "format": "text"
+          },
+          "stage": {
+            "type": "string",
+            "format": "text"
+          },
+          "description": {
+            "type": "string",
+            "format": "text"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "bigint"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "timestamp with time zone",
+            "default": "now()"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "timestamp with time zone",
+            "default": "now()"
+          },
+          "archived_at": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "expected_closing_date": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "index": {
+            "type": "integer",
+            "format": "smallint"
+          }
+        }
+      },
+      "tags": {
+        "required": [
+          "color",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "name": {
+            "type": "string",
+            "format": "text"
+          },
+          "color": {
+            "type": "string",
+            "format": "text"
+          }
+        }
+      },
+      "contacts_summary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "first_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "last_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "gender": {
+            "type": "string",
+            "format": "text"
+          },
+          "title": {
+            "type": "string",
+            "format": "text"
+          },
+          "email_jsonb": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "email_fts": {
+            "type": "string",
+            "format": "text"
+          },
+          "phone_jsonb": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "phone_fts": {
+            "type": "string",
+            "format": "text"
+          },
+          "background": {
+            "type": "string",
+            "format": "text"
+          },
+          "avatar": {
+            "type": "object",
+            "format": "jsonb"
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "timestamp with time zone"
+          },
+          "has_newsletter": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "format": "text"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `companies.id`.<fk table='companies' column='id'/>",
+            "format": "bigint"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "linkedin_url": {
+            "type": "string",
+            "format": "text"
+          },
+          "company_name": {
+            "type": "string",
+            "format": "text"
+          },
+          "nb_tasks": {
+            "type": "integer",
+            "format": "bigint"
+          }
+        }
+      },
+      "companies": {
+        "required": [
+          "created_at",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Primary Key.<pk/>",
+            "format": "bigint"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "timestamp with time zone",
+            "default": "now()"
+          },
+          "name": {
+            "type": "string",
+            "format": "text"
+          },
+          "sector": {
+            "type": "string",
+            "format": "text"
+          },
+          "size": {
+            "type": "integer",
+            "format": "smallint"
+          },
+          "linkedin_url": {
+            "type": "string",
+            "format": "text"
+          },
+          "website": {
+            "type": "string",
+            "format": "text"
+          },
+          "phone_number": {
+            "type": "string",
+            "format": "text"
+          },
+          "address": {
+            "type": "string",
+            "format": "text"
+          },
+          "zipcode": {
+            "type": "string",
+            "format": "text"
+          },
+          "city": {
+            "type": "string",
+            "format": "text"
+          },
+          "state_abbr": {
+            "type": "string",
+            "format": "text"
+          },
+          "sales_id": {
+            "type": "integer",
+            "description": "Note:\nThis is a Foreign Key to `sales.id`.<fk table='sales' column='id'/>",
+            "format": "bigint"
+          },
+          "context_links": {
+            "type": "object",
+            "format": "json"
+          },
+          "country": {
+            "type": "string",
+            "format": "text"
+          },
+          "description": {
+            "type": "string",
+            "format": "text"
+          },
+          "revenue": {
+            "type": "string",
+            "format": "text"
+          },
+          "tax_identifier": {
+            "type": "string",
+            "format": "text"
+          },
+          "logo": {
+            "type": "object",
+            "format": "jsonb"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "preferParams": {
+        "name": "Prefer",
+        "in": "header",
+        "description": "Preference",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "preferReturn": {
+        "name": "Prefer",
+        "in": "header",
+        "description": "Preference",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "return=representation",
+            "return=minimal",
+            "return=none"
+          ]
+        }
+      },
+      "preferCount": {
+        "name": "Prefer",
+        "in": "header",
+        "description": "Preference",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "count=none"
+          ]
+        }
+      },
+      "preferPost": {
+        "name": "Prefer",
+        "in": "header",
+        "description": "Preference",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "return=representation",
+            "return=minimal",
+            "return=none",
+            "resolution=ignore-duplicates",
+            "resolution=merge-duplicates"
+          ]
+        }
+      },
+      "select": {
+        "name": "select",
+        "in": "query",
+        "description": "Filtering Columns",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "on_conflict": {
+        "name": "on_conflict",
+        "in": "query",
+        "description": "On Conflict",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "order": {
+        "name": "order",
+        "in": "query",
+        "description": "Ordering",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "range": {
+        "name": "Range",
+        "in": "header",
+        "description": "Limiting and Pagination",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rangeUnit": {
+        "name": "Range-Unit",
+        "in": "header",
+        "description": "Limiting and Pagination",
+        "schema": {
+          "type": "string",
+          "default": "items"
+        }
+      },
+      "offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Limiting and Pagination",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Limiting and Pagination",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.contact_id": {
+        "name": "contact_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.text": {
+        "name": "text",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.date": {
+        "name": "date",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.status": {
+        "name": "status",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contact_notes.attachments": {
+        "name": "attachments",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.first_name": {
+        "name": "first_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.last_name": {
+        "name": "last_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.gender": {
+        "name": "gender",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.title": {
+        "name": "title",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.background": {
+        "name": "background",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.avatar": {
+        "name": "avatar",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.first_seen": {
+        "name": "first_seen",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.last_seen": {
+        "name": "last_seen",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.has_newsletter": {
+        "name": "has_newsletter",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.status": {
+        "name": "status",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.tags": {
+        "name": "tags",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.company_id": {
+        "name": "company_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.linkedin_url": {
+        "name": "linkedin_url",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.email_jsonb": {
+        "name": "email_jsonb",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts.phone_jsonb": {
+        "name": "phone_jsonb",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.created_at": {
+        "name": "created_at",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.name": {
+        "name": "name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.sector": {
+        "name": "sector",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.size": {
+        "name": "size",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.linkedin_url": {
+        "name": "linkedin_url",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.website": {
+        "name": "website",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.phone_number": {
+        "name": "phone_number",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.address": {
+        "name": "address",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.zipcode": {
+        "name": "zipcode",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.city": {
+        "name": "city",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.state_abbr": {
+        "name": "state_abbr",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.context_links": {
+        "name": "context_links",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.country": {
+        "name": "country",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.description": {
+        "name": "description",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.revenue": {
+        "name": "revenue",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.tax_identifier": {
+        "name": "tax_identifier",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.logo": {
+        "name": "logo",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.nb_deals": {
+        "name": "nb_deals",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies_summary.nb_contacts": {
+        "name": "nb_contacts",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.favicons_excluded_domains.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.favicons_excluded_domains.domain": {
+        "name": "domain",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.init_state.is_initialized": {
+        "name": "is_initialized",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.first_name": {
+        "name": "first_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.last_name": {
+        "name": "last_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.email": {
+        "name": "email",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.administrator": {
+        "name": "administrator",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.user_id": {
+        "name": "user_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.avatar": {
+        "name": "avatar",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.sales.disabled": {
+        "name": "disabled",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.contact_id": {
+        "name": "contact_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.type": {
+        "name": "type",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.text": {
+        "name": "text",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.due_date": {
+        "name": "due_date",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.done_date": {
+        "name": "done_date",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tasks.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.deal_id": {
+        "name": "deal_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.type": {
+        "name": "type",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.text": {
+        "name": "text",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.date": {
+        "name": "date",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deal_notes.attachments": {
+        "name": "attachments",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.name": {
+        "name": "name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.company_id": {
+        "name": "company_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.contact_ids": {
+        "name": "contact_ids",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.category": {
+        "name": "category",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.stage": {
+        "name": "stage",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.description": {
+        "name": "description",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.amount": {
+        "name": "amount",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.created_at": {
+        "name": "created_at",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.updated_at": {
+        "name": "updated_at",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.archived_at": {
+        "name": "archived_at",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.expected_closing_date": {
+        "name": "expected_closing_date",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.deals.index": {
+        "name": "index",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tags.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tags.name": {
+        "name": "name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.tags.color": {
+        "name": "color",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.first_name": {
+        "name": "first_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.last_name": {
+        "name": "last_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.gender": {
+        "name": "gender",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.title": {
+        "name": "title",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.email_jsonb": {
+        "name": "email_jsonb",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.email_fts": {
+        "name": "email_fts",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.phone_jsonb": {
+        "name": "phone_jsonb",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.phone_fts": {
+        "name": "phone_fts",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.background": {
+        "name": "background",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.avatar": {
+        "name": "avatar",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.first_seen": {
+        "name": "first_seen",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.last_seen": {
+        "name": "last_seen",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.has_newsletter": {
+        "name": "has_newsletter",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.status": {
+        "name": "status",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.tags": {
+        "name": "tags",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.company_id": {
+        "name": "company_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.linkedin_url": {
+        "name": "linkedin_url",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.company_name": {
+        "name": "company_name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.contacts_summary.nb_tasks": {
+        "name": "nb_tasks",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.id": {
+        "name": "id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.created_at": {
+        "name": "created_at",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.name": {
+        "name": "name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.sector": {
+        "name": "sector",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.size": {
+        "name": "size",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.linkedin_url": {
+        "name": "linkedin_url",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.website": {
+        "name": "website",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.phone_number": {
+        "name": "phone_number",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.address": {
+        "name": "address",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.zipcode": {
+        "name": "zipcode",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.city": {
+        "name": "city",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.state_abbr": {
+        "name": "state_abbr",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.sales_id": {
+        "name": "sales_id",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.context_links": {
+        "name": "context_links",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.country": {
+        "name": "country",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.description": {
+        "name": "description",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.revenue": {
+        "name": "revenue",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.tax_identifier": {
+        "name": "tax_identifier",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "rowFilter.companies.logo": {
+        "name": "logo",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "body.contact_notes": {
+        "description": "contact_notes",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/contact_notes"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/contact_notes"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/contact_notes"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/contact_notes"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.contacts": {
+        "description": "contacts",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.companies_summary": {
+        "description": "companies_summary",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/companies_summary"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/companies_summary"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/companies_summary"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/companies_summary"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.favicons_excluded_domains": {
+        "description": "favicons_excluded_domains",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/favicons_excluded_domains"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/favicons_excluded_domains"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/favicons_excluded_domains"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/favicons_excluded_domains"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.init_state": {
+        "description": "init_state",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/init_state"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/init_state"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/init_state"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/init_state"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.sales": {
+        "description": "sales",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/sales"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/sales"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/sales"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/sales"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.tasks": {
+        "description": "tasks",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/tasks"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/tasks"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/tasks"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/tasks"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.deal_notes": {
+        "description": "deal_notes",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deal_notes"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/deal_notes"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/deal_notes"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/deal_notes"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.deals": {
+        "description": "deals",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deals"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/deals"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/deals"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/deals"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.tags": {
+        "description": "tags",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/tags"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/tags"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/tags"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/tags"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.contacts_summary": {
+        "description": "contacts_summary",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts_summary"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts_summary"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts_summary"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/contacts_summary"
+            }
+          }
+        },
+        "required": false
+      },
+      "body.companies": {
+        "description": "companies",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/companies"
+            }
+          },
+          "application/vnd.pgrst.object+json;nulls=stripped": {
+            "schema": {
+              "$ref": "#/components/schemas/companies"
+            }
+          },
+          "application/vnd.pgrst.object+json": {
+            "schema": {
+              "$ref": "#/components/schemas/companies"
+            }
+          },
+          "text/csv": {
+            "schema": {
+              "$ref": "#/components/schemas/companies"
+            }
+          }
+        },
+        "required": false
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

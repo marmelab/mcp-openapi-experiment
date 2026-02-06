@@ -1,0 +1,21 @@
+{
+  "source": {
+    "type": "filesystem",
+    "path": "server.py",
+    "entrypoint": "create_server"
+  },
+  "dependencies": {
+    "packages": [
+      "fastmcp",
+      "httpx"
+    ]
+  },
+  "environment": {
+    "API_BASE_URL": "http://127.0.0.1:54321/rest/v1"
+  },
+  "metadata": {
+    "name": "REST API MCP Server",
+    "description": "MCP server that exposes REST API endpoints at http://127.0.0.1:54321/rest/v1 as tools and resources",
+    "version": "1.0.0"
+  }
+}
