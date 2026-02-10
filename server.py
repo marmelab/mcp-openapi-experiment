@@ -25,6 +25,12 @@ mcp = FastMCP.from_openapi(
     openapi_spec=openapi_spec,
     client=client,
     name="My API Server",
+    route_maps=[
+        RouteMap(
+            mcp_type=MCPType.RESOURCE,
+            methods=["GET"]
+        )
+    ]
 )
 
 if __name__ == "__main__":
