@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: install start clean
+.PHONY: install start start-graphql clean
 
 
 ERASE_VENV ?= 0
@@ -24,3 +24,7 @@ clean:
 
 start: install
 	@.venv/bin/python server.py
+
+start-graphql: install
+	@.venv/bin/python graphql_server.py
+
